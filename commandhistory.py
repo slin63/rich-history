@@ -32,7 +32,6 @@ def create_command_map() -> dict:
         LENGTH = int(
             min(int(sys.argv[1]) // 1.2, LENGTH_MAX)
         )
-        print(LENGTH)
     except Exception as e:
         print("Issue dynamically setting LENGTH:", e)
 
