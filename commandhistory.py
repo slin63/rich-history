@@ -13,7 +13,7 @@ HISTORY_FILE = os.getenv("HISTFILE")
 HOME_DIR = os.getenv("HOME")
 DIR = os.path.dirname(os.path.realpath(__file__))
 LENGTH = 10
-LENGTH_MAX = 30
+LENGTH_MAX = 29
 EXTENSION_CHARACTER = ["b", "c", "d"]
 EXTENSION_COLOR = {
     "b": "[yellow]$[/yellow]",
@@ -103,11 +103,11 @@ OTHER = False
 def _highlight_first(cmd: str) -> str:
     global OTHER
     first = cmd.find(" ")
-    color = "magenta" if OTHER else "blue"
+    color = "cyan" if OTHER else "blue"
     OTHER = not OTHER
     if first == -1:
         return f"[bold {color}]{cmd}[/bold {color}]"
-    return f"[bold {color}]{cmd[:first]}[/bold {color}]{cmd[first:]}"
+    return f"[bold {color}]{cmd[:first]}[/][white not bold]{cmd[first:]}[/]"
 
 
 if __name__ == "__main__":

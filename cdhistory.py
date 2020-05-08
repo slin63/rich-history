@@ -57,7 +57,7 @@ def get_user_selection(cmd_map: dict) -> str:
     print("")
     for k, cmd in cmd_map.items():
         k = _decorate_key(k)
-        cmd = _highlight_first(cmd.strip())
+        cmd = _highlight_last(cmd.strip())
         pprint(f" {k}  →  {cmd}")
 
     # Get user selection
@@ -89,14 +89,16 @@ def _decorate_key(k: int) -> str:
 OTHER = False
 
 
-def _highlight_first(cmd: str) -> str:
+def _highlight_last(cmd: str) -> str:
     global OTHER
-    first = cmd.find(" ")
-    color = "magenta" if OTHER else "blue"
+    color = "cyan" if OTHER else "blue"
     OTHER = not OTHER
-    if first == -1:
-        return f"[bold {color}]{cmd}[/bold {color}]"
-    return f"[bold {color}]{cmd[:first]}[/bold {color}]{cmd[first:]}"
+
+    last = cmd.split('/')[-1]
+    beginning = cmd[0:len(cmd)-len(last)]
+    last = f"[bold underline {color}]{last}[/]"
+
+    return f"[white not bold]{beginning}[/]{last}"
 
 
 if __name__ == "__main__":
