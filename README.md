@@ -36,6 +36,10 @@ dh() {
     # Call Python script
     $PYTHONPATH $SCRIPTPATH/cdhistory.py $(tput lines) $(dirs -v) && \
         print -z $(cat $SCRIPTPATH/prettycdhistory)
+
+    # Uncomment below and comment above if you want to just immediately change directories
+    # $PYTHONPATH $SCRIPTPATH/cdhistory.py $(tput lines) $(dirs -v) && \
+    #     . $SCRIPTPATH/prettycdhistory
 }
 ```
 3. Source your `.rc` file.

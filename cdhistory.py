@@ -72,7 +72,7 @@ def write_to_runfile(cmd: str) -> None:
     with open(f"{DIR}/{RUNFILE}", "w") as f:
         # Expand tildes
         cmd = cmd.replace("~", HOME_DIR)
-        f.write(cmd)
+        f.write("cd "+cmd)
 
 
 # Functions for making things look pretty
