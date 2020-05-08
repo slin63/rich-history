@@ -1,6 +1,9 @@
-# Pretty History
+# 🌈 Pretty History
 
-Pretty, interactive, and colorful `cd` and command line history.
+Colorful and interactive directory and command history. Made pretty with [github.com/willmcgugan/rich](https://github.com/willmcgugan/rich)
+
+![BEHOLD!](./demo.gif)
+
 
 ## Setup:
 
@@ -21,7 +24,7 @@ ph() {
         print -z $(cat $SCRIPTPATH/prettycommandhistory)
 }
 
-# Rich & interactive cd history (with zsh)
+# Rich & interactive cd history (with zsh only)
 setopt AUTO_PUSHD # automatically do a pushd of each directory you change to.
 dh() {
     # Path to your Python3.7 executable
@@ -34,11 +37,6 @@ dh() {
     $PYTHONPATH $SCRIPTPATH/cdhistory.py $(tput lines) $(dirs -v) && \
         print -z $(cat $SCRIPTPATH/prettycdhistory)
 }
-
-ACD="/Users/seanlin/acd_func.sh"
-
-# Rich & interactive cd -- history
-# TODO
 ```
 3. Source your `.rc` file.
-4. Use `ph` anywhere.
+4. Use `ph` or `dh` anywhere.
