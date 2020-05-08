@@ -1,6 +1,6 @@
-# 🌈 Pretty History
+# 🌈 Pretty && Rich History
 
-Colorful and interactive directory and command history. Made pretty with [github.com/willmcgugan/rich](https://github.com/willmcgugan/rich)
+Colorful and interactive directory and command history. Made rich with [github.com/willmcgugan/rich](https://github.com/willmcgugan/rich).
 
 ![BEHOLD!](./demo.gif)
 
