@@ -1,6 +1,6 @@
-# Pretty-history
+# Pretty History
 
-History. But pretty!
+Pretty, interactive, and colorful `cd` and command line history.
 
 ## Setup:
 
@@ -16,10 +16,26 @@ ph() {
     # Path to where you cloned this script
     SCRIPTPATH="/Users/seanlin/projects/sh/visual-history"
 
-    # Magic
-    HISTFILE=$HISTFILE $PYTHONPATH $SCRIPTPATH/history.py $(tput lines) && \
-        print -z $(cat $SCRIPTPATH/prettyhistory)
+    # Call Python script
+    HISTFILE=$HISTFILE $PYTHONPATH $SCRIPTPATH/commandhistory.py $(tput lines) && \
+        print -z $(cat $SCRIPTPATH/prettycommandhistory)
 }
+
+# Rich & interactive cd history (with zsh)
+setopt AUTO_PUSHD # automatically do a pushd of each directory you change to.
+dh() {
+    # Path to your Python3.7 executable
+    PYTHONPATH="/usr/local/bin/python3.7"
+
+    # Path to where you cloned this script
+    SCRIPTPATH="/Users/seanlin/projects/sh/visual-history"
+
+    # Call Python script
+    $PYTHONPATH $SCRIPTPATH/cdhistory.py $(tput lines) $(dirs -v) && \
+        print -z $(cat $SCRIPTPATH/prettycdhistory)
+}
+
+ACD="/Users/seanlin/acd_func.sh"
 
 # Rich & interactive cd -- history
 # TODO

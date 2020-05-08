@@ -8,8 +8,7 @@ from rich import print as pprint
 from rich.console import Console
 from rich.syntax import Syntax
 
-RUNFILE = "prettycommandhistory"
-HISTORY_FILE = os.getenv("HISTFILE")
+RUNFILE = "prettycdhistory"
 HOME_DIR = os.getenv("HOME")
 DIR = os.path.dirname(os.path.realpath(__file__))
 LENGTH = 10
@@ -27,39 +26,28 @@ signal.signal(signal.SIGINT, graceful_exit)
 
 
 def create_command_map() -> dict:
-    # Scale number of commands to size of current terminal window
+    # Scale number of directories to size of current terminal window
     try:
         LENGTH = int(
             min(int(sys.argv[1]) // 1.2, LENGTH_MAX)
         )
-        print(LENGTH)
     except Exception as e:
         print("Issue dynamically setting LENGTH:", e)
 
-    # Grab last LENGTH entries of history file
-    out = subprocess.Popen(
-        ["tail", "-n", str(LENGTH), HISTORY_FILE],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-    )
-    history, e = out.communicate()
-    history = history.decode("utf-8")
-    if e:
-        raise Exception(e)
+    history = sys.argv[
+        3::2
+    ]  # Skip every other element, starting from element 1
 
-    # Create command to line map
-    id_ = 1
+    # Create directory to line map
+    id_ = 0
     cmd_map = {}
-    for line in history.split("\n"):
-        cmd_start = re.search(r"[\d]+:\d;", line)
-        if cmd_start:
-            cmd = line[cmd_start.end() :]
-            if id_ >= 10:
-                ext = EXTENSION_CHARACTER[(id_ // 10) - 1]
-                cmd_map[f"{id_%10}{ext}"] = cmd
-            else:
-                cmd_map[str(id_)] = cmd
-            id_ += 1
+    for line in history:
+        if id_ >= 10:
+            ext = EXTENSION_CHARACTER[(id_ // 10) - 1]
+            cmd_map[f"{id_%10}{ext}"] = line
+        else:
+            cmd_map[str(id_)] = line
+        id_ += 1
 
     return cmd_map
 
@@ -73,7 +61,7 @@ def get_user_selection(cmd_map: dict) -> str:
         pprint(f" {k}  →  {cmd}")
 
     # Get user selection
-    choice = input(f"\nselect a command → ")
+    choice = input(f"\nselect a directory → ")
     cmd = cmd_map.get(choice)
 
     return cmd
