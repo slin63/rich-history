@@ -1,6 +1,6 @@
 # 🌈 Pretty && Rich History
 
-Colorful and interactive directory and command history. Made rich with [github.com/willmcgugan/rich](https://github.com/willmcgugan/rich).
+Colorful and interactive directory and command history for `zshell`. Made rich with [github.com/willmcgugan/rich](https://github.com/willmcgugan/rich).
 
 ![BEHOLD!](./demo.gif)
 
@@ -9,7 +9,7 @@ Colorful and interactive directory and command history. Made rich with [github.c
 
 1. `git clone https://github.com/slin63/rich-history`
 1. `pip3 install -r requirements.txt`
-2. Update and copy the contents below into your `.zshrc` or `.bashrc` or whatever runcom file you use.
+2. Update and copy the contents below into your `.zshrc`.
 ```bash
 # Rich & interactive command history
 ph() {
@@ -24,7 +24,7 @@ ph() {
         print -z $(cat $SCRIPTPATH/prettycommandhistory)
 }
 
-# Rich & interactive cd history (with zsh only)
+# Rich & interactive cd history
 setopt AUTO_PUSHD # automatically do a pushd of each directory you change to.
 dh() {
     # Path to your Python3.7 executable
@@ -42,5 +42,5 @@ dh() {
     #     . $SCRIPTPATH/prettycdhistory
 }
 ```
-3. Source your `.rc` file.
+3. Source your `.zshrc` file.
 4. Use `ph` or `dh` anywhere.
